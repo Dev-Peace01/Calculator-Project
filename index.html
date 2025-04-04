@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,49 +10,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-
        awesome/6.0.0-beta3/css/all.min.css">
 
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            border-width: 3px;
+            border-color: red;
+            border-style: dashed;
+        }
+
+        .grid :nth-child(16) {
+            color: red;
+            background: #000;
+
+            grid-row-end: span 2;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-      <!-- the header is for the 2 symbols at the top of the application.
-        <header>
+<div id="continer" style="display:hidden">
 
-        </header> -->
-
-        <!-- <hr> -->
-
-       <div class="calculator">
-         <form action="">
+    <div id="calculator">
+        <form action="">
             <div class="display">
-                <input type="text" name="display"> 
-                <!-- <input type="text"name='display' id="output">   -->
+                <input type="text" name="display">
+
             </div>
 
             <div class="symbols">
-                <input type="button" value="C" >
-                <input type="button" value="/" >
-                <input type="button" value="*" >
-                <input type="button" value="DE" >
+                <input type="button" value="C">
+                <!--<input type="button" value="/">-->
+                <button style="background: transparent; border: none; font-size: 24px;">
+                    <img src="/asset/img/divide.svg" width="24px" height="24px"
+                         style="background-color: transparent;" alt="">
+                </button>
+                <input type="button" value="*">
+                <input type="button" value="DE">
             </div>
 
             <div>
                 <input type="button" value="7">
                 <input type="button" value="8">
                 <input type="button" value="9">
-                <input type="button" value="-"id="minus" class="minus" >
+                <input type="button" value="-" id="minus" class="minus">
             </div>
 
             <div>
                 <input type="button" value="4">
                 <input type="button" value="5">
                 <input type="button" value="6">
-                <input type="button" value="+" class="add" >
+                <input type="button" value="+" class="add">
             </div>
 
             <div>
                 <input type="button" value="1">
                 <input type="button" value="2">
                 <input type="button" value="3">
-                <input type="button" value="=" class="equal" >
+                <input type="button" value="=" class="equal">
             </div>
 
             <div>
@@ -59,8 +76,90 @@
                 <input type="button" value="0">
                 <input type="button" value=".">
             </div>
-          </form>
-       </div>
+        </form>
     </div>
+</div>
+
+
+<div class="grid">
+
+
+</div>
+
+
+<script>
+    const fetchNode = (selectorType) => document.querySelector(selectorType.trim());
+    const createElement = (elementType) =>
+        document.createElement(elementType.trim());
+
+    const parentNode = fetchNode(".grid");
+
+    const childrenNodes = [
+
+        {
+            value: 7, text: "7"
+        },
+        {
+            value: 8, text: "8"
+        },
+        {
+            value: 9, text: "9"
+        },
+        {
+            value: "minus", text: "-"
+        },
+        {
+            value: 4, text: "4"
+        },
+        {
+            value: 5, text: "5"
+        },
+        {
+            value: 6, text: "6"
+        },
+        {
+            value: "plus", text: "+"
+        },
+        {
+            value: 3, text: "3"
+        },
+        {
+            value: 2, text: "2"
+        },
+        {
+            value: 1, text: "1"
+        },
+        {
+            value: "equal", text: "="
+        },
+        {
+            value: "percent", text: "%"
+        }, {
+            value: 0, text: "0"
+        },
+        {
+            value: "decimal", text: "."
+        }
+    ]
+
+    for (const entry of childrenNodes) {
+        const {text, value} = entry;
+        const childTextNode = document.createTextNode(text);
+        const childNode = createElement("div");
+
+        childNode.addEventListener("click", () => {
+            window.alert(value)
+        })
+        childNode.appendChild(childTextNode)
+        parentNode.appendChild(childNode);
+        parentNode.appendChild(childNode);
+    }
+
+
+    console.log("ajwgavfl,hja;f")
+
+
+</script>
 </body>
+
 </html>
