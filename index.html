@@ -11,6 +11,10 @@
        awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
+        input[name=display] {
+            width: 100px;
+            background: red;
+        }
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -30,12 +34,12 @@
 </head>
 
 <body>
-<div id="continer" style="display:hidden">
+<div style="display: none">
 
     <div id="calculator">
         <form action="">
             <div class="display">
-                <input type="text" name="display">
+                <input type="text" name="dislay">
 
             </div>
 
@@ -81,7 +85,8 @@
 </div>
 
 
-<div class="grid">
+<input type="text" name="display">
+<div class="grid container">
 
 
 </div>
@@ -95,7 +100,18 @@
     const parentNode = fetchNode(".grid");
 
     const childrenNodes = [
-
+        {
+            value: "C", text: "C"
+        },
+        {
+            value: "divide", text: "divide"
+        },
+        {
+            value: "multiply", text: "multiply"
+        },
+        {
+            value: "delete", text: "delete"
+        },
         {
             value: 7, text: "7"
         },
@@ -142,21 +158,35 @@
         }
     ]
 
-    for (const entry of childrenNodes) {
-        const {text, value} = entry;
-        const childTextNode = document.createTextNode(text);
-        const childNode = createElement("div");
 
-        childNode.addEventListener("click", () => {
-            window.alert(value)
-        })
-        childNode.appendChild(childTextNode)
-        parentNode.appendChild(childNode);
-        parentNode.appendChild(childNode);
+    console.log("ajwgavfl,hja;f")
+    const input = fetchNode("input[name=display]");
+
+
+    for (const entry of childrenNodes) {
+
+        const {text, value} = entry;
+
+        if (typeof value !== "number") {
+            const imgElement = document.createElement("img");
+            imgElement.setAttribute("src", `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0ic2l6ZS01Ij4KICAgIDxwYXRoIGQ9Ik0xMS4yNSA0YTEuMjUgMS4yNSAwIDEgMS0yLjUgMCAxLjI1IDEuMjUgMCAwIDEgMi41IDBaTTMgMTBhLjc1Ljc1IDAgMCAxIC43NS0uNzVoMTIuNWEuNzUuNzUgMCAwIDEgMCAxLjVIMy43NUEuNzUuNzUgMCAwIDEgMyAxMFpNMTAgMTcuMjVhMS4yNSAxLjI1IDAgMSAwIDAtMi41IDEuMjUgMS4yNSAwIDAgMCAwIDIuNVoiIC8+Cjwvc3ZnPgo=`);
+            imgElement.setAttribute("width", "24px");
+            imgElement.setAttribute("height", "24px");
+            parentNode.appendChild(imgElement);
+        } else {
+            const childTextNode = document.createTextNode(text);
+            const childNode = createElement("div");
+
+            childNode.addEventListener("click", () => {
+                input.value += value.toString();
+            })
+            childNode.appendChild(childTextNode)
+            parentNode.appendChild(childNode);
+            parentNode.appendChild(childNode);
+        }
     }
 
 
-    console.log("ajwgavfl,hja;f")
 
 
 </script>
